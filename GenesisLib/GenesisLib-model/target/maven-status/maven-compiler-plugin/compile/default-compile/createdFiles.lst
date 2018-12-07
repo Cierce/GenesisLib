@@ -1,0 +1,6 @@
+com\conindustries\genesislib\model\Book.class
+com\conindustries\genesislib\model\BookFactory.class
+com\conindustries\genesislib\model\LibraryDAO.class
+com\conindustries\genesislib\model\BookItem.class
+com\conindustries\genesislib\model\BookstoreFacade.class
+com\conindustries\genesislib\model\Library.class

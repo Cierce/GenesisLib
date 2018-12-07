@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<library>
+    <books>
+	   <book>
+            <author>J.K. Rowling</author>
+            <bookItemId>0</bookItemId>
+            <name>J.K. Rowling</name>
+            <publisher>Big Book Publishing</publisher>
+        </book>
+        <book>
+            <author>Connor P</author>
+            <bookItemId>1</bookItemId>
+            <name>Connor Phillips</name>
+            <publisher>Sony Publishing</publisher>
+        </book>
+	   <book>
+            <author>Anthony Horowitz</author>
+            <bookItemId>2</bookItemId>
+            <name>Anthony Horowitz</name>
+            <publisher>Black Crow Books</publisher>
+        </book>
+    </books>
+</library>

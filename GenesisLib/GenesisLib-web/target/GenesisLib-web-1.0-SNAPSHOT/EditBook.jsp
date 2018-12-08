@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ListBooks
-    Created on : 07-Dec-2018, 02:14:47
+    Document   : EditBook
+    Created on : 08-Dec-2018, 19:52:18
     Author     : Connor
 --%>
 
@@ -32,7 +32,10 @@
     boolean admin = "admin".equals(role);
     
     String bookId = (String) request.getParameter("bookId");
-    
+    String author = (String) request.getParameter("author");
+    String name = (String) request.getParameter("name");
+    String publisher = (String) request.getParameter("publisher");
+    String isEdit = (String) request.getParameter("isEdit");
     List<BookItem> books = bookstoreFacade.getBooks();
     BookItem book = new BookItem();
 %>
@@ -60,6 +63,15 @@
                if(books.get(i).getBookItemId().equals(Integer.parseInt(bookId)))
                {
                    book = books.get(i);
+                   if(isEdit.equals("true"))
+                   {
+                        book.setBookItemId(Integer.parseInt(bookId));
+                        book.setAuthor(author);
+                        book.setName(name);
+                        book.setPublisher(publisher);
+                        bookstoreFacade.updateBookItem(book);
+                        break;
+                   }
                    break;
                }
                else 
@@ -73,24 +85,19 @@
             //TODO CATCH EXCEPTION
         }
     %>
-     <table>
+      <table>
             <tr>
-                <th>Book ID</th>
-                <th>Author</th>
-                <th>Name</th>
-                <th>Publisher</th>
-                <th></th>
+                <th>Book Contents: EDIT ON</th>
             </tr>
             <tr>
-                <td><input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly></td>
-                <td><input type="text" name="author" value="<%=book.getAuthor()%>" readonly></td>
-                <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
-                <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
                 <td>
                     <form action="EditBook.jsp">
-                        <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
-                        <input type="hidden" name="isEdit" value="false">
-                        <input type="submit" value="edit book" style="color:green;">
+                        <input type="text" name="bookId" value="<%=book.getBookItemId()%>">
+                        <input type="text" name="author" value="<%=book.getAuthor()%>">
+                        <input type="text" name="name" value="<%=book.getName()%>">
+                        <input type="text" name="publisher" value="<%=book.getPublisher()%>">
+                        <input type="hidden" name="isEdit" value="true">
+                        <input type="submit" value="submit edit" style="color:green;">
                     </form>
                 </td>
             </tr>

@@ -25,6 +25,8 @@ public interface LibraryDAO {
     
     public BookItem getBookItem(Integer bookItemId);
     
+    public void updateBookItem(BookItem bookItem);
+    
     public List<BookItem> getBooks();
     
     public void setBooks(List<BookItem> books);

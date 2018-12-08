@@ -186,4 +186,11 @@ public class LibraryDAOImpl implements LibraryDAO {
     public void setBooks(List<BookItem> books) {
        library.setBooks(books);
     }
+
+    @Override
+    public void updateBookItem(BookItem bookItem) {
+       
+       library.updateBook(bookItem);
+       save();
+    }
 }

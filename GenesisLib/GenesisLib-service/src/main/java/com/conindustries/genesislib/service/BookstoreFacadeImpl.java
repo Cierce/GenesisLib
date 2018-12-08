@@ -78,6 +78,11 @@ public class BookstoreFacadeImpl implements BookstoreFacade{
     public void setBooks(List<BookItem> books) {
         libraryDAO.setBooks(books);
     }
+
+    @Override
+    public void updateBookItem(BookItem bookItem) {
+        libraryDAO.updateBookItem(bookItem);
+    }
 }
 
     

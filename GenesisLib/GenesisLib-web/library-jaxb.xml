@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <library>
     <books>
-	   <book>
+        <book>
             <author>J.K. Rowling</author>
             <bookItemId>0</bookItemId>
             <name>J.K. Rowling</name>
@@ -13,11 +13,119 @@
             <name>Connor Phillips</name>
             <publisher>Sony Publishing</publisher>
         </book>
-	   <book>
-            <author>Anthony Horowitz</author>
+        <book>
+            <author>Connor Phillips</author>
             <bookItemId>2</bookItemId>
-            <name>Anthony Horowitz</name>
-            <publisher>Black Crow Books</publisher>
+            <name>Darkest Light</name>
+            <publisher>Sony Publishing</publisher>
+        </book>
+        <book>
+            <author>Luke Jennings</author>
+            <bookItemId>3</bookItemId>
+            <name>Stary Nights</name>
+            <publisher>Different Books</publisher>
+        </book>
+        <book>
+            <author>Jane Moor</author>
+            <bookItemId>4</bookItemId>
+            <name>Authur</name>
+            <publisher>Yin Books</publisher>
+        </book>
+        <book>
+            <author>Jane Moor</author>
+            <bookItemId>4</bookItemId>
+            <name>Authur</name>
+            <publisher>Yin Books</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Good Publishing</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Chris Valentine</author>
+            <bookItemId>5</bookItemId>
+            <name>Darkest Light</name>
+            <publisher>Bright House</publisher>
+        </book>
+        <book>
+            <author>Tamer Altintop</author>
+            <bookItemId>6</bookItemId>
+            <name>Horrible Days</name>
+            <publisher>Faire Books</publisher>
+        </book>
+        <book>
+            <author>Tamer Altintop</author>
+            <bookItemId>6</bookItemId>
+            <name>Horrible Days</name>
+            <publisher>Faire Books</publisher>
+        </book>
+        <book>
+            <author>Luke Jennings</author>
+            <bookItemId>8</bookItemId>
+            <name>Connor Phillips</name>
+            <publisher>Yin Books</publisher>
+        </book>
+        <book>
+            <author>James Dean</author>
+            <bookItemId>8</bookItemId>
+            <name>Killer Dragons in Space </name>
+            <publisher>Connor Books</publisher>
+        </book>
+        <book>
+            <author>Lauran Kannwl</author>
+            <bookItemId>9</bookItemId>
+            <name>Death Gauntlet</name>
+            <publisher>Era Publishing</publisher>
+        </book>
+        <book>
+            <author>Connor</author>
+            <bookItemId>10</bookItemId>
+            <name>Killer Night</name>
+            <publisher>Book Publishing</publisher>
         </book>
     </books>
 </library>

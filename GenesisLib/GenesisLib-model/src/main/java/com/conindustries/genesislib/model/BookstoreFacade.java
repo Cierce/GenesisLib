@@ -24,6 +24,9 @@ public interface BookstoreFacade extends LibraryDAO {
     public BookItem getBookItem(Integer bookItemId);
     
     @Override
+    public void updateBookItem(BookItem bookItem);
+    
+    @Override
     public List<BookItem> getBooks();
     
     @Override

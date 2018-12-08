@@ -34,4 +34,17 @@ public class Library {
     {
         this.books = books;
     }
+    
+    public boolean updateBook(BookItem updatedBookItem)
+    {
+        for(int i = 0; i < this.books.size(); i++)
+        {
+            if(books.get(i).getBookItemId() == updatedBookItem.getBookItemId())
+            {
+                books.set(i, updatedBookItem);
+                return true;
+            }
+        }
+        return false;
+    }
 }

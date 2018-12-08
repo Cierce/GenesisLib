@@ -33,9 +33,6 @@
     
     String bookId = (String) request.getParameter("bookId");
     
-    String action = (String) request.getParameter("action");
-    //BookItem bookItem = bookstoreFacade.createBookItem(BookFactory.createBook(1, "Connor P", "Connor Phillips", "Sony Publishing"));
-    //Book book = bookstoreFacade.createBook(bookItem, 24.40);
     List<BookItem> books = bookstoreFacade.getBooks();
     BookItem book = new BookItem();
 %>
@@ -82,15 +79,44 @@
                 <th>Author</th>
                 <th>Name</th>
                 <th>Publisher</th>
+                <th></th>
             </tr>
             <tr>
-                <td><%=book.getBookItemId()%></td>
-                <td><%=book.getAuthor()%></td>
-                <td><%=book.getName()%></td>
-                <td><%=book.getPublisher()%></td>
+                <td><input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly></td>
+                <td><input type="text" name="author" value="<%=book.getAuthor()%>" readonly></td>
+                <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
+                <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
+                <td>
+                    <form action="EditBook.jsp">
+                        <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
+                        <input type="hidden" name="isEdit" value="false">
+                        <input type="submit" value="edit book" style="color:green;">
+                    </form>
+                </td>
             </tr>
+     </table>
     <%
+        
     %>   
-        </table>
+    <br>
+            <table>
+                <tr>
+                    <th>Add a Book</th>
+                </tr>
+                <tr>
+                    <td>
+                        <form action="AddBook.jsp">
+                            <input type="text" name="bookId" placeholder="unique book id">
+                            <input type="text" name="author" placeholder="author">
+                            <input type="text" name="name" placeholder="name">
+                            <input type="text" name="publisher" placeholder="publisher">
+                            <input type="submit" value="add book" style="color:green;">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+    <%
+        
+    %>
     </body>
 </html>

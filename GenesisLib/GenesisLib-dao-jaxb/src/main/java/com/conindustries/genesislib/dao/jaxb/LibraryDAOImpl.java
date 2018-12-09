@@ -72,6 +72,20 @@ public class LibraryDAOImpl implements LibraryDAO {
        
        synchronized(Lock)
        {
+           List<BookItem> bookItems = library.getBooks();
+           
+           for(BookItem bookItem : bookItems)
+           {
+               if(bookItem.getBookItemId() == bookItemId)
+               {
+                  bookItems.remove(bookItemId-1);
+                  library.setBooks(bookItems);
+                  save();
+                  return true;
+               }
+           }
+           return false;
+           /*
            Iterator<BookItem> iterator = library.getBooks().iterator();
            while(iterator.hasNext())
            {
@@ -80,11 +94,12 @@ public class LibraryDAOImpl implements LibraryDAO {
                if(bookItem.getBookItemId().equals(bookItemId))
                {
                    iterator.remove();
+                   
                    save();
                    return true;
                }
            }
-           return false;
+           return false;*/
        }
     }
 
@@ -104,7 +119,7 @@ public class LibraryDAOImpl implements LibraryDAO {
                 BookItem foundBook = iterator.next();
                 if(foundBook.getBookItemId().equals(bookItemId))
                 {
-                    return foundBook;
+                    return copy(foundBook);
                 }
             }
         }

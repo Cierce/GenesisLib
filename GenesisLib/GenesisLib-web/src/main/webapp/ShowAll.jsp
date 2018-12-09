@@ -1,9 +1,10 @@
 <%-- 
-    Document   : ListBooks
-    Created on : 07-Dec-2018, 02:14:47
+    Document   : ShowAll
+    Created on : 09-Dec-2018, 14:40:58
     Author     : Connor
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="com.conindustries.genesislib.model.BookItem"%>
 <%@page import="com.conindustries.genesislib.model.BookFactory"%>
@@ -51,12 +52,8 @@
         <title>Search Titles</title>
     </head>
     <body>
-        <h1>Search for a book title!</h1
+        <h1>All Library Book Entries</h1
         <br>
-        <form action="ListBooks.jsp">
-            <input type="number" name="bookId" placeholder="Book_ID">
-            <input type="submit" value="Search Library" style="color:green;">
-        </form>
     <br>
     <%
         try {
@@ -66,21 +63,7 @@
             }
             for(int i = 0; i < books.size(); i++)
             {
-               if(books.get(i).getBookItemId().equals(Integer.parseInt(bookId)))
-               {
-                   book = books.get(i);
-                   break;
-               }
-               else 
-               {
-                   book = books.get(i);
-               }
-            }
-        }
-        catch (NumberFormatException ex)
-        {
-            //TODO CATCH EXCEPTION
-        }
+               book = books.get(i);
     %>
      <table>
             <tr>
@@ -96,31 +79,30 @@
                 <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
                 <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
                 <td><input type="text" name="price" value="£<%=String.format("%.2f", book.getPrice())%>" readonly></td>
-                <%
-                    if(!(bookstoreFacade.getBooks().isEmpty()))
-                    {
-                %>
-                        <td>
+                <td>
                             <form action="EditBook.jsp">
                                 <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
-                                <input type="hidden" name="isEdit" value="false">
-                                <input type="hidden" name="fromLib" value="false">
+                                <input type="hidden" name="fromLib" value="true">
                                 <input type="submit" value="edit book" style="color:green;">
                             </form>
                         </td>
                         <td>
-                            <form action="ListBooks.jsp">
+                            <form action="ShowAll.jsp">
                                 <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
                                 <input type="hidden" name="isDelete" value="true">
                                 <input type="submit" value="delete book" style="color:red;">
                             </form>
                         </td>
-                <%
-                    }
-                %>
             </tr>
      </table>
-     <p><a href="./AddBook.jsp?role=admin" target="_self">Add Book</a></p>
-     <p><a href="./ShowAll.jsp?role=admin" target="_self">Show All Books</a></p>
+    <%
+            }
+        }
+        catch (NumberFormatException ex)
+        {
+            //TODO CATCH EXCEPTION
+        }
+    %>
+     <p><a href="./ListBooks.jsp?role=admin&bookId=1" target="_self">Back</a></p>
     </body>
 </html>

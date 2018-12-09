@@ -13,8 +13,8 @@ public class BookFactory {
     
     private static BookItem bookItem = null;
     
-    public static BookItem createBook(Integer bookItemId, String author, String name, String publisher)
+    public static BookItem createBook(Integer bookItemId, String author, String name, String publisher, double price)
     {
-        return bookItem = new BookItem(bookItemId, author, name, publisher);
+        return bookItem = new BookItem(bookItemId, author, name, publisher, price);
     }
 }

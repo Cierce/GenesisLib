@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlType;
 
 public class Book extends BookItem {
     
-    private double price;
     private Integer bookNumber;
 
     public Book()
@@ -26,16 +25,6 @@ public class Book extends BookItem {
       
     }
    
-    public void setPrice(double price)
-    {
-        this.price = price;
-    }
-    
-    public double getPrice()
-    {
-        return price;
-    }
-    
     public void setBookNumber(Integer bookNumber)
     {
         this.bookNumber = bookNumber;
@@ -49,7 +38,6 @@ public class Book extends BookItem {
     @Override
     public String toString()
     {
-       return("Book Price: " + price
-               + "\nBook Contents " + super.toString());
+       return("\nBook Contents " + super.toString());
     }
 }

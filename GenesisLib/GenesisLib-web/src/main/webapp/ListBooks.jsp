@@ -32,6 +32,11 @@
     boolean admin = "admin".equals(role);
     
     String bookId = (String) request.getParameter("bookId");
+    String isDelete = (String) request.getParameter("isDelete");
+    if(isDelete == null)
+    {
+        isDelete = "false";
+    }
     
     List<BookItem> books = bookstoreFacade.getBooks();
     BookItem book = new BookItem();
@@ -55,6 +60,10 @@
     <br>
     <%
         try {
+            if(isDelete.equals("true"))
+            {
+                bookstoreFacade.deleteBookItem(Integer.parseInt(bookId));
+            }
             for(int i = 0; i < books.size(); i++)
             {
                if(books.get(i).getBookItemId().equals(Integer.parseInt(bookId)))
@@ -79,44 +88,39 @@
                 <th>Author</th>
                 <th>Name</th>
                 <th>Publisher</th>
-                <th></th>
+                <th>Price</th>
             </tr>
             <tr>
                 <td><input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly></td>
                 <td><input type="text" name="author" value="<%=book.getAuthor()%>" readonly></td>
                 <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
                 <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
-                <td>
-                    <form action="EditBook.jsp">
-                        <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
-                        <input type="hidden" name="isEdit" value="false">
-                        <input type="submit" value="edit book" style="color:green;">
-                    </form>
-                </td>
+                <td><input type="text" name="price" value="£<%=String.format("%.2f", book.getPrice())%>" readonly></td>
+                <%
+                    if(!(bookstoreFacade.getBooks().isEmpty()))
+                    {
+                %>
+                        <td>
+                            <form action="EditBook.jsp">
+                                <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
+                                <input type="hidden" name="isEdit" value="false">
+                                <input type="hidden" name="fromLib" value="false">
+                                <input type="submit" value="edit book" style="color:green;">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="ListBooks.jsp">
+                                <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
+                                <input type="hidden" name="isDelete" value="true">
+                                <input type="submit" value="delete book" style="color:red;">
+                            </form>
+                        </td>
+                <%
+                    }
+                %>
             </tr>
      </table>
-    <%
-        
-    %>   
-    <br>
-            <table>
-                <tr>
-                    <th>Add a Book</th>
-                </tr>
-                <tr>
-                    <td>
-                        <form action="AddBook.jsp">
-                            <input type="text" name="bookId" placeholder="unique book id">
-                            <input type="text" name="author" placeholder="author">
-                            <input type="text" name="name" placeholder="name">
-                            <input type="text" name="publisher" placeholder="publisher">
-                            <input type="submit" value="add book" style="color:green;">
-                        </form>
-                    </td>
-                </tr>
-            </table>
-    <%
-        
-    %>
+     <p><a href="./AddBook.jsp?role=admin" target="_self">Add Book</a></p>
+     <p><a href="./ShowAll.jsp?role=admin" target="_self">Show All Books</a></p>
     </body>
 </html>

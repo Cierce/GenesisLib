@@ -55,16 +55,25 @@
                         <input type="text" name="author" placeholder="author">
                         <input type="text" name="name" placeholder="name">
                         <input type="text" name="publisher" placeholder="publisher">
+                        <input type="text" name="price" placeholder="(£) Price">
                         <input type="submit" value="Add Book" style="color:green;">
                     </form>
                 </td>
             </tr>
-     </table>    
-        
+     </table>   
     <br>
     <%
-        BookItem newBook = new BookItem(Integer.parseInt(bookId), author, name, publisher);
-        bookstoreFacade.createBookItem(newBook);
+        try {
+                bookstoreFacade.createBookItem(new BookItem(Integer.parseInt(bookId), author, name, publisher, Double.parseDouble(price)));
+        }
+        catch (NumberFormatException ex)
+        {
+            //TODO CATCH EXCEPTION
+        }
+        catch(NullPointerException ex2)
+        {
+            //TODO CATCH EXCEPTION
+        }
     %>
     <h1>Recently Added</h1>
     <table>
@@ -73,14 +82,35 @@
                 <th>Author</th>
                 <th>Name</th>
                 <th>Publisher</th>
+                <th>Price</th>
             </tr>
+            <%
+                if(!(bookstoreFacade.getBooks().isEmpty()))
+                {
+            %>
+             <tr>
+                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId()%></td>
+                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getAuthor()%></td>
+                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getName()%></td>
+                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getPublisher()%></td>
+                <td>£<%=String.format("%.2f", bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getPrice())%></td>
+            </tr>
+            <%
+                }
+                else
+                {  
+            %>
             <tr>
-                <td><%=newBook.getBookItemId()%></td>
-                <td><%=newBook.getAuthor()%></td>
-                <td><%=newBook.getName()%></td>
-                <td><%=newBook.getPublisher()%></td>
+                <td>0</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>£0.00</td>
             </tr>
+            <%
+                }
+            %>
      </table>
-            <p> <a href="./ListBooks.jsp?role=admin" target="_blank">View Library</a></p>
+            <p><a href="./ListBooks.jsp?role=admin&bookId=1" target="_self">Back</a></p>
     </body>
 </html>

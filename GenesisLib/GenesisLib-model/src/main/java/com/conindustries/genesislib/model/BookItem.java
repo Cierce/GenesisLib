@@ -13,10 +13,9 @@ import javax.xml.bind.annotation.XmlType;
 /**
  *
  * @author Connor
- 
-@XmlRootElement(name = "bookitem")
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"bookItemId", "author", "name", "publisher"})*/
+@XmlType(propOrder = {"bookItemId", "author", "name", "publisher", "price"})
 @XmlRootElement
 public class BookItem  {
     
@@ -24,18 +23,20 @@ public class BookItem  {
     private String author;
     private String name;
     private String publisher;
+    private double price;
     
     public BookItem()
     {
         
     }
     
-    public BookItem(Integer bookItemId, String author, String name, String publisher)
+    public BookItem(Integer bookItemId, String author, String name, String publisher, double price)
     {
         this.bookItemId = bookItemId;
         this.author = author;
         this.name = name;
         this.publisher = publisher;
+        this.price = price;
     }
   
     public void setBookItemId(Integer bookItemId)
@@ -70,6 +71,15 @@ public class BookItem  {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+    public double getPrice()
+    {
+        return price;
+    }
+    
+    public void setPrice(double price)
+    {
+        this.price = price;
     }
     
     @Override

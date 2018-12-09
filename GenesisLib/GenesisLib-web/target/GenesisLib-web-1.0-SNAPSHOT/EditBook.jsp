@@ -35,7 +35,15 @@
     String author = (String) request.getParameter("author");
     String name = (String) request.getParameter("name");
     String publisher = (String) request.getParameter("publisher");
+    String price = (String) request.getParameter("price");
     String isEdit = (String) request.getParameter("isEdit");
+    if(isEdit == null)
+    {
+        isEdit = "false";
+    }
+    
+    String fromLib = (String) request.getParameter("fromLib");
+    
     List<BookItem> books = bookstoreFacade.getBooks();
     BookItem book = new BookItem();
 %>
@@ -63,15 +71,6 @@
                if(books.get(i).getBookItemId().equals(Integer.parseInt(bookId)))
                {
                    book = books.get(i);
-                   if(isEdit.equals("true"))
-                   {
-                        book.setBookItemId(Integer.parseInt(bookId));
-                        book.setAuthor(author);
-                        book.setName(name);
-                        book.setPublisher(publisher);
-                        bookstoreFacade.updateBookItem(book);
-                        break;
-                   }
                    break;
                }
                else 
@@ -79,8 +78,22 @@
                    book = books.get(i);
                }
             }
+    
+            if(isEdit.equals("true"))
+            {
+                book.setBookItemId(Integer.parseInt(bookId));
+                book.setAuthor(author);
+                book.setName(name);
+                book.setPublisher(publisher);
+                book.setPrice (Double.parseDouble(price));
+                bookstoreFacade.updateBookItem(book);
+            }        
         }
         catch (NumberFormatException ex)
+        {
+            //TODO CATCH EXCEPTION
+        }
+        catch (NullPointerException ex2)
         {
             //TODO CATCH EXCEPTION
         }
@@ -96,34 +109,27 @@
                         <input type="text" name="author" value="<%=book.getAuthor()%>">
                         <input type="text" name="name" value="<%=book.getName()%>">
                         <input type="text" name="publisher" value="<%=book.getPublisher()%>">
+                        <input type="text" name="price" value="<%=String.format("%.2f", book.getPrice())%>">
                         <input type="hidden" name="isEdit" value="true">
+                        <input type="hidden" name="fromLib" value="false">
                         <input type="submit" value="submit edit" style="color:green;">
                     </form>
                 </td>
             </tr>
      </table>
-    <%
-        
-    %>   
-    <br>
-            <table>
-                <tr>
-                    <th>Add a Book</th>
-                </tr>
-                <tr>
-                    <td>
-                        <form action="AddBook.jsp">
-                            <input type="text" name="bookId" placeholder="unique book id">
-                            <input type="text" name="author" placeholder="author">
-                            <input type="text" name="name" placeholder="name">
-                            <input type="text" name="publisher" placeholder="publisher">
-                            <input type="submit" value="add book" style="color:green;">
-                        </form>
-                    </td>
-                </tr>
-            </table>
-    <%
-        
-    %>
+        <%
+            if(fromLib.equals("true"))
+            {
+        %>
+                <p><a href="./ShowAll.jsp?role=admin" target="_self">Back</a></p>
+        <%
+            } 
+            else
+            {
+        %>
+                <p><a href="./ListBooks.jsp?role=admin&bookId=1" target="_self">Back</a></p>
+        <%
+            }
+        %>
     </body>
 </html>

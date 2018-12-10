@@ -85,21 +85,6 @@ public class LibraryDAOImpl implements LibraryDAO {
                }
            }
            return false;
-           /*
-           Iterator<BookItem> iterator = library.getBooks().iterator();
-           while(iterator.hasNext())
-           {
-               BookItem bookItem = iterator.next();
-               
-               if(bookItem.getBookItemId().equals(bookItemId))
-               {
-                   iterator.remove();
-                   
-                   save();
-                   return true;
-               }
-           }
-           return false;*/
        }
     }
 
@@ -200,6 +185,7 @@ public class LibraryDAOImpl implements LibraryDAO {
     @Override
     public void setBooks(List<BookItem> books) {
        library.setBooks(books);
+       save();
     }
 
     @Override

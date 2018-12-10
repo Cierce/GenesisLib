@@ -62,7 +62,14 @@
         try {
             if(isDelete.equals("true"))
             {
-                bookstoreFacade.deleteBookItem(Integer.parseInt(bookId));
+                for(int i = 0; i < bookstoreFacade.getBooks().size(); i++)
+                {
+                    if(books.get(i).getBookItemId() == Integer.parseInt(bookId))
+                    {
+                        books.remove(i);
+                        bookstoreFacade.setBooks(books);
+                    }
+                }
             }
             for(int i = 0; i < books.size(); i++)
             {
@@ -86,16 +93,16 @@
             <tr>
                 <th>Book ID</th>
                 <th>Author</th>
-                <th>Name</th>
+                <th>Book Title</th>
                 <th>Publisher</th>
                 <th>Price</th>
             </tr>
             <tr>
-                <td><input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly></td>
-                <td><input type="text" name="author" value="<%=book.getAuthor()%>" readonly></td>
-                <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
-                <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
-                <td><input type="text" name="price" value="£<%=String.format("%.2f", book.getPrice())%>" readonly></td>
+                <td><%=book.getBookItemId()%></td>
+                <td><%=book.getAuthor()%></td>
+                <td><%=book.getName()%></td>
+                <td><%=book.getPublisher()%></td>
+                <td>£<%=String.format("%.2f", book.getPrice())%></td>
                 <%
                     if(!(bookstoreFacade.getBooks().isEmpty()))
                     {

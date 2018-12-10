@@ -32,8 +32,48 @@
     String price = (String) request.getParameter("price");
     
     String action = (String) request.getParameter("action");
-%>
+    
+    int newBookId;
+    if(bookstoreFacade.getBooks().isEmpty())
+    {
+        newBookId = bookstoreFacade.getBooks().size()+1;
+    }
+    else
+    {
+        newBookId = bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId()+1;
+    }
 
+    try {
+            if(bookstoreFacade.getBooks().isEmpty())
+            {
+                newBookId = bookstoreFacade.getBooks().size()+1;
+                bookstoreFacade.createBookItem(new BookItem(newBookId, author, name, publisher, Double.parseDouble(price)));
+            }
+            else
+            {
+                if(newBookId == bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId())
+                {
+                            bookstoreFacade.createBookItem(new BookItem(bookstoreFacade.getBooks().size(), author, name, publisher, Double.parseDouble(price)));
+                }
+                else
+                {
+                    bookstoreFacade.createBookItem(new BookItem(newBookId, author, name, publisher, Double.parseDouble(price)));
+                }
+            }
+        }
+        catch (NumberFormatException ex)
+        {
+            //TODO CATCH EXCEPTION
+        }
+        catch(NullPointerException ex2)
+        {
+            //TODO CATCH EXCEPTION
+        }
+        catch(ArrayIndexOutOfBoundsException ex3)
+        {
+            //TODO CATCH EXCEPTION
+        }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -51,7 +91,13 @@
             <tr>
                 <td>
                     <form action="AddBook.jsp">
-                        <input type="text" name="bookId" placeholder="unique book id">
+                        <%
+                            if(!(bookstoreFacade.getBooks().isEmpty()))
+                            {
+                                newBookId = bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId()+1;
+                            }
+                        %>
+                        <input type="text" name="bookId" placeholder="<%=newBookId%>" readonly>
                         <input type="text" name="author" placeholder="author">
                         <input type="text" name="name" placeholder="name">
                         <input type="text" name="publisher" placeholder="publisher">
@@ -62,19 +108,6 @@
             </tr>
      </table>   
     <br>
-    <%
-        try {
-                bookstoreFacade.createBookItem(new BookItem(Integer.parseInt(bookId), author, name, publisher, Double.parseDouble(price)));
-        }
-        catch (NumberFormatException ex)
-        {
-            //TODO CATCH EXCEPTION
-        }
-        catch(NullPointerException ex2)
-        {
-            //TODO CATCH EXCEPTION
-        }
-    %>
     <h1>Recently Added</h1>
     <table>
             <tr>
@@ -111,6 +144,8 @@
                 }
             %>
      </table>
-            <p><a href="./ListBooks.jsp?role=admin&bookId=1" target="_self">Back</a></p>
+            <p><a href="./ListBooks.jsp?role=admin&bookId=" target="_self">Back</a></p>
     </body>
 </html>
+
+

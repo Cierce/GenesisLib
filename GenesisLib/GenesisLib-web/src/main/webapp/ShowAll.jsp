@@ -55,30 +55,38 @@
         <h1>All Library Book Entries</h1
         <br>
     <br>
+   
+     <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Author</th>
+                <th>Book Title</th>
+                <th>Publisher</th>
+                <th>Price</th>
+            </tr>
     <%
         try {
             if(isDelete.equals("true"))
             {
-                bookstoreFacade.deleteBookItem(Integer.parseInt(bookId));
+                for(int i = 0; i < bookstoreFacade.getBooks().size(); i++)
+                {
+                    if(books.get(i).getBookItemId() == Integer.parseInt(bookId))
+                    {
+                        books.remove(i);
+                        bookstoreFacade.setBooks(books);
+                    }
+                }
             }
             for(int i = 0; i < books.size(); i++)
             {
                book = books.get(i);
     %>
-     <table>
             <tr>
-                <th>Book ID</th>
-                <th>Author</th>
-                <th>Name</th>
-                <th>Publisher</th>
-                <th>Price</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly></td>
-                <td><input type="text" name="author" value="<%=book.getAuthor()%>" readonly></td>
-                <td><input type="text" name="name" value="<%=book.getName()%>" readonly></td>
-                <td><input type="text" name="publisher" value="<%=book.getPublisher()%>" readonly></td>
-                <td><input type="text" name="price" value="£<%=String.format("%.2f", book.getPrice())%>" readonly></td>
+                <td><%=book.getBookItemId()%></td>
+                <td><%=book.getAuthor()%></td>
+                <td><%=book.getName()%></td>
+                <td><%=book.getPublisher()%></td>
+                <td>£<%=String.format("%.2f", book.getPrice())%></td>
                 <td>
                             <form action="EditBook.jsp">
                                 <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
@@ -94,7 +102,6 @@
                             </form>
                         </td>
             </tr>
-     </table>
     <%
             }
         }
@@ -103,6 +110,7 @@
             //TODO CATCH EXCEPTION
         }
     %>
+     </table>
      <p><a href="./ListBooks.jsp?role=admin&bookId=1" target="_self">Back</a></p>
     </body>
 </html>

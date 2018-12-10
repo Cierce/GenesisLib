@@ -11,10 +11,10 @@ package com.conindustries.genesislib.model;
  */
 public class BookFactory {
     
-    private static BookItem bookItem = null;
+    private static Book book = null;
     
-    public static BookItem createBook(Integer bookItemId, String author, String name, String publisher, double price)
+    public static Book createBook(String author, String title, String publisher)
     {
-        return bookItem = new BookItem(bookItemId, author, name, publisher, price);
+        return book = new Book(author, title, publisher);
     }
 }

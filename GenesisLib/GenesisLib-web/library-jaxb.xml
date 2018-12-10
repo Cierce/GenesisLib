@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <library>
-    <books/>
+    <books>
+        <book>
+            <author>Connor Phillips</author>
+            <publisher>Yin Books</publisher>
+            <title>Wild Bright</title>
+            <bookItemId>1</bookItemId>
+            <price>12.0</price>
+            <isLoaned>true</isLoaned>
+        </book>
+    </books>
 </library>

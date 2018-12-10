@@ -33,9 +33,16 @@
     
     String bookId = (String) request.getParameter("bookId");
     String isDelete = (String) request.getParameter("isDelete");
+    String isLoaned = (String) request.getParameter("isLoaned");
+    
     if(isDelete == null)
     {
         isDelete = "false";
+    }
+    
+    if(isLoaned == null)
+    {
+        isLoaned = "false";
     }
     
     List<BookItem> books = bookstoreFacade.getBooks();
@@ -60,14 +67,34 @@
     <br>
     <%
         try {
+            if(isLoaned.equals("true"))
+            {
+                for(int i = 0; i < books.size(); i++)
+                {
+                    if(books.get(i).getBookItemId() == Integer.parseInt(bookId))
+                    {
+                        if(books.get(i).getLoanStatus() != true)
+                        {
+                            books.get(i).setLoanStatus(true);
+                        }
+                        else if(books.get(i).getLoanStatus() == true)
+                        {
+                            books.get(i).setLoanStatus(false);
+                        }
+                        bookstoreFacade.setBooks(books);
+                        break;
+                    }
+                }
+            }
             if(isDelete.equals("true"))
             {
-                for(int i = 0; i < bookstoreFacade.getBooks().size(); i++)
+                for(int i = 0; i < books.size(); i++)
                 {
                     if(books.get(i).getBookItemId() == Integer.parseInt(bookId))
                     {
                         books.remove(i);
                         bookstoreFacade.setBooks(books);
+                        break;
                     }
                 }
             }
@@ -93,16 +120,18 @@
             <tr>
                 <th>Book ID</th>
                 <th>Author</th>
-                <th>Book Title</th>
+                <th>Title</th>
                 <th>Publisher</th>
                 <th>Price</th>
+                <th>Loaned</th>
             </tr>
             <tr>
                 <td><%=book.getBookItemId()%></td>
                 <td><%=book.getAuthor()%></td>
-                <td><%=book.getName()%></td>
+                <td><%=book.getTitle()%></td>
                 <td><%=book.getPublisher()%></td>
                 <td>£<%=String.format("%.2f", book.getPrice())%></td>
+                <td><%=book.getLoanStatus()%></td>
                 <%
                     if(!(bookstoreFacade.getBooks().isEmpty()))
                     {
@@ -113,6 +142,13 @@
                                 <input type="hidden" name="isEdit" value="false">
                                 <input type="hidden" name="fromLib" value="false">
                                 <input type="submit" value="edit book" style="color:green;">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="ListBooks.jsp">
+                                <input type="hidden" name="bookId" value="<%=book.getBookItemId()%>">
+                                <input type="hidden" name="isLoaned" value="true">
+                                <input type="submit" value="loan book" style="color:green;">
                             </form>
                         </td>
                         <td>

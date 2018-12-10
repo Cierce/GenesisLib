@@ -16,23 +16,46 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-public class Book extends BookItem {
+public class Book {
     
-    private Integer bookNumber;
-
+    private String author;
+    private String title;
+    private String publisher;
+    
     public Book()
     {
-      
-    }
-   
-    public void setBookNumber(Integer bookNumber)
-    {
-        this.bookNumber = bookNumber;
+        
     }
     
-    public Integer getBookNumber()
+    public Book(String author, String title, String publisher)
     {
-        return bookNumber;
+        this.author = author;
+        this.title = title;
+        this.publisher = publisher;
+    }
+    
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
     
     @Override

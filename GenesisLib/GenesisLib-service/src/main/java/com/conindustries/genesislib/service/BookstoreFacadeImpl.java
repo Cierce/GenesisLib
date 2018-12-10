@@ -48,25 +48,8 @@ public class BookstoreFacadeImpl implements BookstoreFacade{
     }
 
     @Override
-    public Book createBook(BookItem bookItem, double price) {
-        
-        if(bookItem == null)
-        {
-            throw new IllegalArgumentException("bookItem must not be null");
-        }
-        
-        Book book = new Book();
-        
-        Integer bookNumber = nextBookNumber.addAndGet(1);
-        
-        book.setBookItemId(bookItem.getBookItemId());
-        book.setName(bookItem.getName());
-        book.setAuthor(bookItem.getAuthor());
-        book.setPublisher(bookItem.getPublisher());
-        book.setPrice(price);
-        book.setBookNumber(bookNumber);
-        
-        return book;
+    public Book createBook(String author, String title, String publisher) {
+        return new Book(author, title, publisher);
     }
 
     @Override

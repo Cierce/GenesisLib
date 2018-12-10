@@ -27,7 +27,7 @@
     
     String bookId = (String) request.getParameter("bookId");
     String author = (String) request.getParameter("author");
-    String name = (String) request.getParameter("name");
+    String title = (String) request.getParameter("title");
     String publisher = (String) request.getParameter("publisher");
     String price = (String) request.getParameter("price");
     
@@ -47,17 +47,17 @@
             if(bookstoreFacade.getBooks().isEmpty())
             {
                 newBookId = bookstoreFacade.getBooks().size()+1;
-                bookstoreFacade.createBookItem(new BookItem(newBookId, author, name, publisher, Double.parseDouble(price)));
+                bookstoreFacade.createBookItem(new BookItem(newBookId, Double.parseDouble(price), new Book(author, title, publisher)));
             }
             else
             {
                 if(newBookId == bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId())
                 {
-                            bookstoreFacade.createBookItem(new BookItem(bookstoreFacade.getBooks().size(), author, name, publisher, Double.parseDouble(price)));
+                    bookstoreFacade.createBookItem(new BookItem(bookstoreFacade.getBooks().size(), Double.parseDouble(price), new Book(author, title, publisher)));
                 }
                 else
                 {
-                    bookstoreFacade.createBookItem(new BookItem(newBookId, author, name, publisher, Double.parseDouble(price)));
+                    bookstoreFacade.createBookItem(new BookItem(newBookId, Double.parseDouble(price), new Book(author, title, publisher)));
                 }
             }
         }
@@ -99,7 +99,7 @@
                         %>
                         <input type="text" name="bookId" placeholder="<%=newBookId%>" readonly>
                         <input type="text" name="author" placeholder="author">
-                        <input type="text" name="name" placeholder="name">
+                        <input type="text" name="title" placeholder="title">
                         <input type="text" name="publisher" placeholder="publisher">
                         <input type="text" name="price" placeholder="(£) Price">
                         <input type="submit" value="Add Book" style="color:green;">
@@ -113,7 +113,7 @@
             <tr>
                 <th>Book ID</th>
                 <th>Author</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Publisher</th>
                 <th>Price</th>
             </tr>
@@ -124,7 +124,7 @@
              <tr>
                 <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getBookItemId()%></td>
                 <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getAuthor()%></td>
-                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getName()%></td>
+                <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getTitle()%></td>
                 <td><%=bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getPublisher()%></td>
                 <td>£<%=String.format("%.2f", bookstoreFacade.getBooks().get(bookstoreFacade.getBooks().size()-1).getPrice())%></td>
             </tr>

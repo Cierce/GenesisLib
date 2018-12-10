@@ -27,7 +27,7 @@
     
     String bookId = (String) request.getParameter("bookId");
     String author = (String) request.getParameter("author");
-    String name = (String) request.getParameter("name");
+    String title = (String) request.getParameter("title");
     String publisher = (String) request.getParameter("publisher");
     String price = (String) request.getParameter("price");
     String isEdit = (String) request.getParameter("isEdit");
@@ -59,7 +59,7 @@
             {
                 book.setBookItemId(Integer.parseInt(bookId));
                 book.setAuthor(author);
-                book.setName(name);
+                book.setTitle(title);
                 book.setPublisher(publisher);
                 book.setPrice (Double.parseDouble(price));
                 bookstoreFacade.updateBookItem(book);
@@ -84,7 +84,7 @@
         <title>Search Titles</title>
     </head>
     <body>
-        <h1>Editing: <%=book.getName()%> by <%=book.getAuthor()%></h1
+        <h1>Editing: <%=book.getTitle()%> by <%=book.getAuthor()%></h1
     <br>
       <table>
             <tr>
@@ -95,7 +95,7 @@
                     <form action="EditBook.jsp">
                         <input type="text" name="bookId" value="<%=book.getBookItemId()%>" readonly>
                         <input type="text" name="author" value="<%=book.getAuthor()%>">
-                        <input type="text" name="name" value="<%=book.getName()%>">
+                        <input type="text" name="title" value="<%=book.getTitle()%>">
                         <input type="text" name="publisher" value="<%=book.getPublisher()%>">
                         <input type="text" name="price" value="<%=String.format("%.2f", book.getPrice())%>">
                         <input type="hidden" name="isEdit" value="true">

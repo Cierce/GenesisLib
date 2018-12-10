@@ -37,5 +37,5 @@ public interface BookstoreFacade extends LibraryDAO {
      * @param book
      * @return new book with a unique bookId
      */
-    public Book createBook(BookItem bookItem, double price);
+    public Book createBook(String author, String name, String publisher);
 }

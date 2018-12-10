@@ -14,28 +14,27 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Connor
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"bookItemId", "author", "name", "publisher", "price"})
+@XmlType(propOrder = {"bookItemId", "price", "isLoaned"})
 @XmlRootElement
-public class BookItem  {
+public class BookItem extends Book{
     
     private Integer bookItemId = null;
-    private String author;
-    private String name;
-    private String publisher;
     private double price;
+    private boolean isLoaned;
     
     public BookItem()
     {
         
     }
     
-    public BookItem(Integer bookItemId, String author, String name, String publisher, double price)
-    {
+    public BookItem(Integer bookItemId, double price, Book book)
+    { 
         this.bookItemId = bookItemId;
-        this.author = author;
-        this.name = name;
-        this.publisher = publisher;
+        super.setAuthor(book.getAuthor());
+        super.setTitle(book.getTitle());
+        super.setPublisher(book.getPublisher());
         this.price = price;
     }
   
@@ -49,44 +48,28 @@ public class BookItem  {
         return bookItemId;
     }
     
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-    public double getPrice()
-    {
-        return price;
-    }
-    
     public void setPrice(double price)
     {
         this.price = price;
     }
     
+    public double getPrice()
+    {
+        return price;
+    }
+    
+    public void setLoanStatus(boolean isLoaned)
+    {
+        this.isLoaned = isLoaned;
+    }
+    
+    public boolean getLoanStatus()
+    {
+        return isLoaned;
+    }
+    
     @Override
     public String toString() {
-        return "ID: " + bookItemId
-                + "\nAuthor: " + author
-                + "\nName: " + name
-                + "\nPublisher " + publisher;
+        return "ID: " + bookItemId;
     }
 }
